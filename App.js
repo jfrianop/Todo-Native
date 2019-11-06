@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
-import ProductList from './components/ProductList';
-import ProductForm from './components/ProductForm';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import NewProduct from './pages/NewProduct'
+import ProductDetails from './pages/ProductDetails'
+import Products from './pages/Products'
 import Constants from 'expo-constants'
 
+const Routes = createStackNavigator({
+  products: Products,
+  newProduct: NewProduct,
+  productDetails: ProductDetails,
+});
+
+const AppContainer = createAppContainer(Routes);
+
 export default function App() {
-  const [products, setProducts] = useState([
-    { name: "Chontaduro", description: "Fruta típica del pacífico colombiano", price: "$35.000", key: '0' },
-    { name: "Banano", description: "Fruta típica del urabá colombiano", price: "$45.000", key: '1' }
-  ])
-
-  const addProduct = function (name, description, price) {
-    const newProducts = [...products, { name, description, price, key: products.length.toString() }]
-    setProducts(newProducts)
-  }
-
   return (
-    <SafeAreaView style={styles.container} >
-      <ScrollView style={styles.scrollView}>
-        <ProductList data={products} />
-      </ScrollView>
-      <ProductForm style={styles.productForm} submitForm={addProduct} />
-    </SafeAreaView>
+    <AppContainer />
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    margin: Constants.statusBarHeight,
   },
   scrollView: {
     backgroundColor: 'white',

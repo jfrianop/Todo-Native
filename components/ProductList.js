@@ -5,7 +5,17 @@ import Product from './Product';
 export default function ProductList(props) {
     return (
         <View>
-            <FlatList data={props.data} renderItem={({ item }) => (<Product name={item.name} description={item.description} price={item.price} />)} />
+            <FlatList
+                data={props.data}
+                renderItem={({ item }) => (
+                    <Product
+                        name={item.name}
+                        description={item.description}
+                        price={item.price}
+                        onDetails={() => props.onDetails(item.name, item.description, item.price)}
+                    />
+                )}
+            />
         </View>
     )
 }

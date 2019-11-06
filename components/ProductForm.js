@@ -7,7 +7,7 @@ export default function ProductForm(props) {
     const [price, setPrice] = useState("");
 
     const onSubmit = function () {
-        props.submitForm(name, description, price)
+        props.submitForm({ name, description, price })
         setName("")
         setDescription("")
         setPrice("")
